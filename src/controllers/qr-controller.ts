@@ -1,7 +1,7 @@
 import { Request, Response, Router } from 'express';
 import router from 'express-promise-router';
-import { writeFile } from 'node:fs/promises';
-import path from 'node:path';
+// import { writeFile } from 'node:fs/promises';
+// import path from 'node:path';
 import QRCode from 'qrcode';
 import { z } from 'zod';
 
@@ -78,7 +78,7 @@ export class QRCodeController implements Controller {
             qrCodeEntity,
         });
 
-        const p = path.join(path.resolve(), 'qr-codes', `${qrCodeEntity.urlExtension}.png`);
-        await writeFile(p, qrCode);
+        // const p = path.join(path.resolve(), 'qr-codes', `${qrCodeEntity.urlExtension}.png`);
+        // await writeFile(p, qrCode);
     }
 }
