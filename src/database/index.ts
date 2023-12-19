@@ -15,6 +15,8 @@ export async function connectToDatabase(
     AppDataSource.setOptions({
         ...connectionOptions,
         type: 'postgres',
+        synchronize: true, // TODO: probably change this once we go live
+        dropSchema: true,
         logging: false,
         entities: [QRCodeEntity],
     });

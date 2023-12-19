@@ -1,6 +1,6 @@
 {
     "name": "af-qr-code-generator-backend",
-    "version": "1.0.0",
+    "version": "1.2.0",
     "author": "",
     "description": "",
     "license": "MIT",
@@ -27,6 +27,7 @@
         "pm2:delete": "pm2 delete process.json"
     },
     "dependencies": {
+        "@types/qrcode": "^1.5.5",
         "cron-parser": "^4.9.0",
         "dotenv": "^16.3.1",
         "express": "4.18.2",
@@ -36,16 +37,17 @@
         "pino": "8.17.1",
         "pino-pretty": "10.3.0",
         "pm2": "^5.3.0",
+        "qrcode": "^1.5.3",
         "reflect-metadata": "^0.2.1",
         "typeorm": "^0.3.17",
         "zod": "^3.22.4"
     },
     "devDependencies": {
         "@types/express": "4.17.21",
-        "@types/node": "^20.10.4",
+        "@types/node": "^20.10.5",
         "@types/node-schedule": "2.1.5",
-        "@typescript-eslint/eslint-plugin": "^6.14.0",
-        "@typescript-eslint/parser": "^6.14.0",
+        "@typescript-eslint/eslint-plugin": "^6.15.0",
+        "@typescript-eslint/parser": "^6.15.0",
         "eslint": "^8.56.0",
         "eslint-plugin-import": "^2.29.1",
         "eslint-plugin-unicorn": "^49.0.0",

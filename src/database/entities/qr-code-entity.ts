@@ -1,36 +1,27 @@
-import {
-    BaseEntity,
-    Column,
-    CreateDateColumn,
-    Entity,
-    PrimaryGeneratedColumn,
-    Unique,
-} from 'typeorm';
+import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryColumn, Unique } from 'typeorm';
 
 @Entity()
-@Unique(['id'])
+@Unique(['urlExtension'])
 export class QRCodeEntity extends BaseEntity {
-    @PrimaryGeneratedColumn()
-    id: string;
-
-    @Column()
-    pointsTo: string;
-
     /**
      * Gen daca url-ul este diicot.cc/9uifhsrf89
      * urlExtension -> 9uifhsrf89
      */
-    @Column()
-    urlExtension: string;
+    @PrimaryColumn()
+    urlExtension!: string;
 
     /**
-     * Idee furata de aici: https://wanago.io/2021/11/01/api-nestjs-storing-files-postgresql-database/
+     * Unde duce url-ul
+     * Gen https://google.com etc.
      */
+    @Column()
+    pointsTo!: string;
+
     @Column({
         type: 'bytea',
     })
-    qrCodeImage: Uint8Array;
+    qrCodeImage!: Buffer;
 
     @CreateDateColumn()
-    createdAt: Date;
+    createdAt!: Date;
 }

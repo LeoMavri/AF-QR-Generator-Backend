@@ -9,9 +9,11 @@ Scris cu:
 
 # TODOs
 
--   Single user?
--   Pachet pentru generare QR code
--   Ce setari pentru generare sa fie pe frontend
+-   Single user? (da)
+-   Pachet pentru generare QR code (done)
+-   Ce setari pentru generare sa fie pe frontend (cam gg)
 -   Mutat validare .env in alt fisier
 -   Autorizare user
--   /qr/ - post + generare cod
+-   /qr/ - post + generare cod (done)
+-   randomise the urlExtension
+-   check if that url is taken already
