@@ -31,6 +31,9 @@ const validInput = z.object({
     databaseName: z.string({
         required_error: `The database (table) name needs to be specified in the .env file.`,
     }),
+    authHeader: z.string({
+        required_error: `The authentification header needs to be specified in the .env file.`,
+    }),
 });
 
 export async function validateVariables(): Promise<{
@@ -40,6 +43,7 @@ export async function validateVariables(): Promise<{
     databaseUser: string;
     databasePassword: string;
     databaseName: string;
+    authHeader: string;
 }> {
     const config = {
         port: parseInt(process.env.PORT),
@@ -48,6 +52,7 @@ export async function validateVariables(): Promise<{
         databaseUser: process.env.DATABASE_USERNAME,
         databasePassword: process.env.DATABASE_PASSWORD,
         databaseName: process.env.DATABASE_NAME,
+        authHeader: process.env.AUTH_HEADER,
     };
 
     const result = validInput.safeParse(config);

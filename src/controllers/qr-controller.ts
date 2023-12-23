@@ -1,17 +1,17 @@
 import { Request, Response, Router } from 'express';
 import router from 'express-promise-router';
-// import { writeFile } from 'node:fs/promises';
-// import path from 'node:path';
+import { randomBytes } from 'node:crypto';
 import QRCode from 'qrcode';
 import { z } from 'zod';
 
 import { Controller } from './controller.js';
 import { QRCodeEntity } from '../database/entities/index.js';
+import { Logger } from '../utils/index.js';
 
 export class QRCodeController implements Controller {
     public path = '/qr';
     public router: Router = router();
-    // public authToken = 'TODO:CHANGETHIS';
+    public authToken = process.env.AUTH_HEADER;
 
     public register(): void {
         this.router.get('/', (req, res) => this.getCodes(req, res));
@@ -61,24 +61,34 @@ export class QRCodeController implements Controller {
                 error: true,
                 message: 'Something went wrong while generating the QR code.',
             });
+
+            Logger.error(`Failed to generate QR Code for ${result.data.pointsTo}`, err);
+
             return;
         }
 
-        // TODO: randomise the urlExtension
-        // TODO; check if that url is taken already
-
-        const qrCodeEntity = await QRCodeEntity.create({
-            urlExtension: 'balling',
+        const qrCodeData = {
+            urlExtension: randomBytes(12).toString('hex'),
             pointsTo: result.data.pointsTo,
             qrCodeImage: qrCode,
-        }).save();
+        };
 
-        res.json({
-            error: false,
-            qrCodeEntity,
-        });
+        try {
+            await QRCodeEntity.insert(qrCodeData);
 
-        // const p = path.join(path.resolve(), 'qr-codes', `${qrCodeEntity.urlExtension}.png`);
-        // await writeFile(p, qrCode);
+            res.json({
+                error: false,
+                qrCodeData,
+            });
+        } catch (err) {
+            res.json({
+                error: true,
+                message: 'Something went wrong while inserting the QR code into the database.',
+            });
+
+            Logger.error(`Failed to insert QR Code into the database.`, err);
+
+            return;
+        }
     }
 }

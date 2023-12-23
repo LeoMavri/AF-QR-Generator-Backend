@@ -3,6 +3,7 @@ import router from 'express-promise-router';
 
 import { Controller } from './controller.js';
 import { QRCodeEntity } from '../database/entities/index.js';
+import { Logger } from '../utils/index.js';
 
 export class RedirectController implements Controller {
     public path = '/redirect';
@@ -23,6 +24,14 @@ export class RedirectController implements Controller {
             // TODO: make a proper 404 page in the frontend (CC: mitza)
             res.status(404).send('Not found');
             return;
+        }
+
+        try {
+            await QRCodeEntity.update(qrCode.urlExtension, {
+                timesScanned: () => 'timesScanned + 1',
+            });
+        } catch (err) {
+            Logger.warn(`Something went wrong while trying to increment timesScanned.`, err);
         }
 
         res.redirect(qrCode.pointsTo);

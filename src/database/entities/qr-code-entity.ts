@@ -17,10 +17,25 @@ export class QRCodeEntity extends BaseEntity {
     @Column()
     pointsTo!: string;
 
+    /**
+     * Buffer 
+     * "qrCodeImage": {
+            "type": "Buffer",
+            "data": [
+                69,
+                420
+            ]
+        },
+     */
     @Column({
         type: 'bytea',
     })
     qrCodeImage!: Buffer;
+
+    @Column({
+        default: 0,
+    })
+    timesScanned!: number;
 
     @CreateDateColumn()
     createdAt!: Date;
