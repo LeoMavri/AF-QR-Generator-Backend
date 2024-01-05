@@ -31,7 +31,7 @@ export class QRCodeController implements Controller {
 
     private validAddCodeBody = z.object({
         pointsTo: z.string(),
-        correctionFactor: z.number(),
+        // correctionFactor: z.number(),
         errorCorrectionLevel: z
             .enum(['low', 'medium', 'quartile', 'high', 'L', 'M', 'Q', 'H'])
             .optional(),
