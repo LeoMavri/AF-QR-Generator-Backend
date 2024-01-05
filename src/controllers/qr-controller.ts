@@ -56,8 +56,16 @@ export class QRCodeController implements Controller {
 
         let qrCode: Buffer;
 
+        const qrCodeData = {
+            urlExtension: randomBytes(12).toString('hex'),
+            pointsTo: result.data.pointsTo,
+            qrCodeImage: Buffer.from(''),
+        };
+
         try {
-            qrCode = await QRCode.toBuffer(result.data.pointsTo);
+            qrCode = await QRCode.toBuffer(
+                `https://api.diicot.cc/redirect/${qrCodeData.urlExtension}`
+            );
         } catch (err) {
             res.status(500).json({
                 error: true,
@@ -69,11 +77,7 @@ export class QRCodeController implements Controller {
             return;
         }
 
-        const qrCodeData = {
-            urlExtension: randomBytes(12).toString('hex'),
-            pointsTo: result.data.pointsTo,
-            qrCodeImage: qrCode,
-        };
+        qrCodeData.qrCodeImage = qrCode;
 
         try {
             await QRCodeEntity.insert(qrCodeData);
