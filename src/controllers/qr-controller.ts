@@ -46,6 +46,7 @@ export class QRCodeController implements Controller {
         const result = this.validAddCodeBody.safeParse(body);
         if (result.success === false) {
             console.log(req.body);
+            console.log(result.error.format());
             res.status(400).json({
                 error: true,
                 message: result.error.message,
