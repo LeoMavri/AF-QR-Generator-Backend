@@ -11,7 +11,7 @@ import { Logger } from '../utils/index.js';
 export class QRCodeController implements Controller {
     public path = '/qr';
     public router: Router = router();
-    public authToken = process.env.AUTH_HEADER;
+    // public authToken = process.env.AUTH_HEADER;
 
     public register(): void {
         this.router.get('/', (req, res) => this.getCodes(req, res));
