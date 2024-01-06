@@ -18,11 +18,9 @@ export class RedirectController implements Controller {
 
         const qrCode = await QRCodeEntity.findOneBy({ urlExtension: id });
 
-        console.log(id, qrCode);
-
         if (!qrCode) {
             // TODO: make a proper 404 page in the frontend (CC: mitza)
-            res.status(404).send('Not found');
+            res.status(404).send('This QR Code does not exist.');
             return;
         }
 
