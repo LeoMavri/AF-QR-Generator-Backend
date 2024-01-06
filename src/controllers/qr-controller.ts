@@ -19,7 +19,11 @@ export class QRCodeController implements Controller {
     }
 
     private async getCodes(req: Request, res: Response): Promise<void> {
-        const qrCodes = await QRCodeEntity.find();
+        const qrCodes = await QRCodeEntity.find({
+            order: {
+                createdAt: 'DESC',
+            },
+        });
 
         res.json({
             error: false,
