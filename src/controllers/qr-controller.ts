@@ -68,7 +68,18 @@ export class QRCodeController implements Controller {
 
         try {
             qrCode = await QRCode.toBuffer(
-                `https://api.diicot.cc/redirect/${qrCodeData.urlExtension}`
+                `https://api.diicot.cc/redirect/${qrCodeData.urlExtension}`,
+                {
+                    type: 'png',
+                    margin: 2,
+                    errorCorrectionLevel: result.data.errorCorrectionLevel,
+                    version: result.data.version,
+                    maskPattern: result.data.maskPattern as any,
+                    rendererOpts: {
+                        deflateLevel: 1,
+                        deflateStrategy: 3,
+                    },
+                }
             );
         } catch (err) {
             res.status(500).json({
