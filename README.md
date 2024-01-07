@@ -7,13 +7,22 @@ Scris cu:
 -   Express.js
 -   Zod
 
-# TODOs
+## Instalare
 
--   Single user? (da)
--   Pachet pentru generare QR code (done)
--   Ce setari pentru generare sa fie pe frontend (cam gg)
--   Mutat validare .env in alt fisier (done)
--   Autorizare user
--   /qr/ - post + generare cod (done)
--   randomise the urlExtension (done)
--   check if that url is taken already (not needed)
+-   Instalare Node.js (v20 LTS)
+-   Instalare PostgreSQL
+-   Creare baza de date cu numele setat in `.env`
+-   `npm install`
+-   `npm run start`
+
+## Env
+
+```env
+PORT=API_PORT_HERE
+DATABASE_HOST=
+DATABASE_PORT=
+DATABASE_NAME=
+DATABASE_USERNAME=
+DATABASE_PASSWORD=
+AUTH_HEADER=UNUSED
+```
