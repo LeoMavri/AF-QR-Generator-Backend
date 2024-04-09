@@ -15,7 +15,7 @@ export async function connectToDatabase(
     AppDataSource.setOptions({
         ...connectionOptions,
         type: 'postgres',
-        // synchronize: true,
+        synchronize: true,
         // dropSchema: true,
         logging: false,
         entities: [QRCodeEntity],
